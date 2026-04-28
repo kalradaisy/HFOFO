@@ -3,7 +3,23 @@ physics QGSP_BIC doStochastics=0
 beam gaussian particle=mu+ meanMomentum=172 nEvents=100
 trackcuts keep=mu+
 
-param histoFile=EnergyLoss
+param part=mu+
+param X=0 # beam location in X mm
+param Y=0 # beam location in Y mm
+param Z=0
+param p=172 #MeV/c
+
+param maxStep=10.0 steppingVerbose=0 nTrace=0
+
+
+reference particle=$part \
+    beamX=$X beamY=$Y \
+    beamZ=$Z \
+    beamXp=0 beamYp=0 \
+    referenceMomentum=$p \
+    
+
+param histoFile=EnergyLossDiffZNoSto
 
 material C A=12.011 Z=6 density=1.69
 
@@ -12,6 +28,8 @@ tubs Target outerRadius=100 material=C length=2.5 color=1,0,0
 virtualdetector DetBefore radius=500 color=0,0,1
 virtualdetector DetAfter radius=500 color=0,1,0
 
-place DetBefore z=95
+place DetBefore z=50
 place Target z=100
-place DetAfter z=200
+place DetAfter z=500
+
+trace format=ascii nTrace=1 oneNTuple=1 filename=trace.txt 
