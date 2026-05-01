@@ -1,13 +1,13 @@
-physics QGSP_BIC doStochastics=0 
+physics QGSP_BIC doStochastics=1
 
-beam gaussian particle=mu+ meanMomentum=172 nEvents=100
+beam gaussian particle=mu+ meanMomentum=500 nEvents=100
 trackcuts keep=mu+
 
 param part=mu+
 param X=0 # beam location in X mm
 param Y=0 # beam location in Y mm
 param Z=0
-param p=172 #MeV/c
+param p=500 #MeV/c
 
 param maxStep=10.0 steppingVerbose=0 nTrace=0
 
@@ -19,17 +19,25 @@ reference particle=$part \
     referenceMomentum=$p \
     
 
-param histoFile=EnergyLossDiffZNoSto
+param histoFile=EnergyLosstest
 
 material C A=12.011 Z=6 density=1.69
 
-tubs Target outerRadius=100 material=C length=2.5 color=1,0,0
+#tubs Target outerRadius=100 material=C length=2.5 color=1,0,0
+#tubs Target outerRadius=100 material=LITHIUM_HYDRIDE length=2.5 color=1,0,0
+#trap Target height=350 length=700 upperWidth=0.005 lowerWidth=59.5 material=LITHIUM_HYDRIDE color=0,0,1 
+
+#box Target width=200 height=200 length=25 material=C color=1,0,0
+
 
 virtualdetector DetBefore radius=500 color=0,0,1
 virtualdetector DetAfter radius=500 color=0,1,0
 
 place DetBefore z=50
-place Target z=100
+place Target z=250
 place DetAfter z=500
 
+#place DetBefore z=100
+#place Target z=550
+#place DetAfter z=1050
 trace format=ascii nTrace=1 oneNTuple=1 filename=trace.txt 
